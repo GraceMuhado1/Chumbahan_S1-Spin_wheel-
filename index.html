@@ -24,7 +24,10 @@
 <body class=bgimage>
 
     <style>
-
+.clickspin{
+    position:relative;
+    top:-6px
+}
 
 
         #label{
@@ -411,7 +414,7 @@ $(document).on('submit', 'form[data-confirm]', function(e){
                                 rotation += 360 - Math.round(ps / 2);
 
                                 vis.transition()
-                                    .duration(2000)
+                                    .duration(14000)
                                     .attrTween("transform", rotTween)
                                     .each("end", function () {
                                         //mark question as seen
@@ -481,7 +484,7 @@ $(document).on('submit', 'form[data-confirm]', function(e){
                                 return array;
                             }
 
-                        },7000);
+                        },15000);
 
                         setTimeout(function () {
                             // window.location.reload(1);
@@ -500,14 +503,14 @@ $(document).on('submit', 'form[data-confirm]', function(e){
                             //     lockBtn.disabled = true;
                             // // $('#submitChoices').attr("disabled", true);
 
-                        }, 8000);
+                        }, 15000);
 
 
 
                         setTimeout(function () {
                         $("#label").hide();
                             $("#losewheel").hide();
-                        }, 2000);
+                        }, 15000);
                     }
 
                 }
@@ -637,7 +640,7 @@ $(document).on('submit', 'form[data-confirm]', function(e){
 
                         var ps = 360 / data.length,
                             pieslice = Math.round(1400 / data.length),
-                            rng = Math.floor((Math.random() * 1440) +  2000);
+                            rng = Math.floor((Math.random() * 1000) +  8000);
 
                             // rng = Math.floor(Math.random() * 1 + 4 * 1000);
                         rotation = (Math.round(rng / ps) * ps);
@@ -653,7 +656,7 @@ $(document).on('submit', 'form[data-confirm]', function(e){
                         rotation += 360 - Math.round(ps / 2);
 
                         vis.transition()
-                            .duration(6000)
+                            .duration(15000)
                             .attrTween("transform", rotTween)
                             .each("end", function () {
                                 //mark question as seen
