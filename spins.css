@@ -14,6 +14,14 @@ body{
     background-color:#b00343;
 }
 
+.spinHide{
+    width: 100%;
+    height: 440px;
+    /* background-color: red; */
+    margin-top: -193px;
+}
+
+
 #chart{
     width: 500px;
     height: 500px;
