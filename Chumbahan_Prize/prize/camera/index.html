@@ -1,0 +1,156 @@
+<html>
+
+<head>
+    <title>camera action</title>
+    <link rel="stylesheet" href="main.css" type="text/css" />
+    <script type="text/javascript" src="../../Winwheel.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.0.2.js"
+        integrity="sha256-0u0HIBCKddsNUySLqONjMmWAZMQYlxTRbA8RfvtCAW0=" crossorigin="anonymous"></script>
+
+</head>
+
+<body style = "background-color: #b00343;">
+    <style>
+        .prize_day {
+            width: 42%;
+            position: relative;
+            top: -1007px;
+        }
+    </style>
+   
+      
+   
+    <div align="center" style="margin-top:-65px">
+        <img src="chumbahan.png" class="" style="width: 26%;position: relative;top: 69px;z-index: 5;" />
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tr>
+
+                <td width="500" height="564" align="center" style="top: 13px;position: relative;">
+                    <canvas id="canvas" width="500" height="560">
+                        <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas. Please try
+                            another.</p>
+                    </canvas>
+
+                </td>
+            </tr>
+        </table>
+
+        <div class="" style="position: relative;z-index:10;">
+
+            <img id="spin_button" src="spin.png" alt="Spin" onClick="calculatePrize();"
+                style="width: 114px;border-radius: 17px;"/>
+
+        </div>
+        <canvas id="image"></canvas>
+        <div>
+
+        </div>
+
+        <img src="prize.png" class="prize_day" />
+    </div>
+
+
+    <script>
+
+        var canvas = document.getElementById('image');
+        var ctx = canvas.getContext('2d');
+
+        var img = new Image();
+
+        img.onload = function () {
+            canvas.width = 450
+            canvas.height = 600
+            canvas.style.position = "relative";
+            canvas.style.top = "-565px";
+
+            ctx.drawImage(img, 0, 0, 450, 450);
+        }
+
+        img.src = 'wheelframe.png';
+
+
+
+
+        // Create new wheel object specifying the parameters at creation time.
+        let theWheel = new Winwheel({
+            'numSegments': 9,                 // Specify number of segments.
+            'outerRadius': 200,               // Set outer radius so wheel fits inside the background.
+            'drawText': true,              // Code drawn text can be used with segment images.
+            'textFontSize': 8,
+            'textOrientation': 'curved',
+            'textAlignment': 'inner',
+            'textMargin': 165,
+            'textFontFamily': 'monospace',
+            // 'textStrokeStyle'   : 'black',
+            'textLineWidth': 2,
+            'textFillStyle': 'white',
+            'drawMode': 'segmentImage',    // Must be segmentImage to draw wheel using one image per segemnt.
+            'segments':                    // Define segments including image and text.
+                [
+                    { 'image': 'images/dan1.png', 'text': 'DANIEL WELLINGTON' },
+                    { 'image': 'images/cam2.png', 'text': 'CUBIX ACTION CAM' },
+                    { 'image': 'images/sport1.png', 'text': 'SPORTS ACTIVE' },
+                    { 'image': 'images/dan3.png', 'text': 'DANIEL WELLINGTON' },
+                    { 'image': 'images/sport3.png', 'text': 'SPORTS ACTIVE' },
+                    { 'image': 'images/cam3.png', 'text': 'CUBIX ACTION CAM' },
+                    { 'image': 'images/dan2.png', 'text': 'DANIEL WELLINGTON' },
+                    { 'image': 'images/sport2.png', 'text': 'SPORTS ACTIVE' },
+                    { 'image': 'images/cam1.png', 'text': 'CUBIX ACTION CAM' }
+                ],
+            'animation':           // Specify the animation to use.
+            {
+                'type': 'spinToStop',
+                'duration': 9,     // Duration in seconds.
+                'spins': 8,     // Number of complete spins.
+                'callbackAfter': 'drawTriangle()'
+            }
+        });
+        $(".prize_day").hide();
+
+        function calculatePrize() {
+            // This formula always makes the wheel stop somewhere inside prize 3 at least
+            // 1 degree away from the start and end edges of the segment.
+            // let stopAt = (50 + Math.floor((Math.random() * 25))) with random stop
+            let stopAt = (50)
+            
+            // Important thing is to set the stopAngle of the animation before stating the spin.
+            theWheel.animation.stopAngle = stopAt;
+
+            // May as well start the spin from here.
+            theWheel.startAnimation();
+
+
+            setTimeout(function () {
+
+                $(".prize_day").show();
+            
+            }, 9000);
+
+        }
+
+        drawTriangle();
+
+        function drawTriangle() {
+            // Get the canvas context the wheel uses.
+            let ctx = theWheel.ctx;
+
+            ctx.strokeStyle = 'navy';     // Set line colour.
+            ctx.fillStyle = 'aqua';     // Set fill colour.
+            ctx.lineWidth = 2;
+            ctx.beginPath();              // Begin path.
+            ctx.moveTo(200, 5);           // Move to initial position.
+            ctx.lineTo(290, 5);           // Draw lines to make the shape.
+            ctx.lineTo(245, 50);
+            ctx.lineTo(200, 5);
+            ctx.stroke();                 // Complete the path by stroking (draw lines).
+            ctx.fill();
+            ctx.rect(0, 0, 200, 150);
+
+        }
+
+
+    </script>
+</body>
+
+</html>
